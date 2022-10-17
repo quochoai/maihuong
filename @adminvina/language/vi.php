@@ -52,6 +52,7 @@ $lang = [
   'updatePartnerText' => 'Cập nhật logo đối tác',
   'partnerName' => 'Tên đối tác',
   'partnerLogo' => 'Logo đối tác',
+  'partnerWebsite' => 'Website đối tác',
   
 
   // tags

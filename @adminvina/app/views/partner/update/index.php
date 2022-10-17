@@ -2,9 +2,10 @@
   require_once "../../../../library.php";
   $id = $_POST['id'];
   $table = $prefixTable.$def['tablePartner'];
-  $news = $h->getById($table, $id);
-  $partnerName = $news['partnerName'.$lngDefault];
-  $partnerLogo = $news['partnerLogo'];
+  $partner = $h->getById($table, $id);
+  $partnerName = $partner['partnerName'.$lngDefault];
+  $partnerLogo = $partner['partnerLogo'];
+  $website = $partner['partnerWebsite'];
   
   if (file_exists($def['imgUploadPartnerRealPath'].$partnerLogo) && !is_null($partnerLogo) && $partnerLogo != '') {
     $partnerLogoShow = '<img src="'.$def['imgUploadPartner'].$partnerLogo.'" width="120" height="auto" />';
@@ -13,8 +14,8 @@
     $partnerLogoShow = '';
     $dpartnerLogo = '';
   }
-  $active = $news['active'];
-  $sortOrder = $news['sortOrder'];
+  $active = $partner['active'];
+  $sortOrder = $partner['sortOrder'];
 ?>
 <div class="modal-dialog modal-lg">
   <div class="modal-content">
@@ -28,7 +29,7 @@
     <form method="post" action="<?php echo $def['partnerUpdateProcess'] ?>" id="form_update" enctype="multipart/form-data">
       <div class="modal-body container-fluid">
         <div class="row">
-          <input type="hidden" name="idNews" value="<?php _e($id) ?>" />
+          <input type="hidden" name="idPartner" value="<?php _e($id) ?>" />
           <div class="col-md-6">
             <div class="form-group">
               <label class="col-form-label" for="partnerName"><?php echo $lang['partnerName'].$lngDefaultText ?></label>
@@ -44,8 +45,14 @@
                   <label class="custom-file-label" for="partnerLogo_e"></label>
                 </div>
               </div>
-              <small class="text-danger"><i><?php echo $lang['sizeImageForm'] ?></i></small>
+              <small class="text-danger"><i><?php echo $lang['sizeImageForm'].' '.$lang['ifNotReplaceBlank'] ?></i></small>
               <div id="display-image-e"<?php _e($dpartnerLogo) ?>><?php _e($partnerLogoShow) ?></div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="col-form-label" for="name"><?php echo $lang['partnerWebsite'].$lngDefaultText ?></label>
+              <input type="text" class="form-control" name="data[partnerWebsite<?php echo $lngDefault ?>]" id="partnerWebsite<?php echo $lngDefault ?>_e" placeholder="https://vinaforest.vn" value="<?php _e($website) ?>" />
             </div>
           </div>
           <div class="col-md-4">
@@ -54,7 +61,7 @@
               <input type="number" class="form-control" min="1" name="data[sortOrder]" id="sortOrder_e" value="<?php echo $sortOrder ?>" />
             </div>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-2">
             <div class="form-group">
               <label class="col-form-label" for="active"><?php echo $lang['activeForm'] ?></label><br />
               <input type="checkbox" name="active" id="active_e"<?php echo ($active == 1) ? ' checked' : '' ?> data-bootstrap-switch data-off-color="danger" data-on-color="success">

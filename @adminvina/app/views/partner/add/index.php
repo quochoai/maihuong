@@ -38,13 +38,19 @@
               <div id="display-image"></div>
             </div>
           </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label class="col-form-label" for="name"><?php echo $lang['partnerWebsite'].$lngDefaultText ?></label>
+              <input type="text" class="form-control" name="data[partnerWebsite<?php echo $lngDefault ?>]" id="partnerWebsite<?php echo $lngDefault ?>" placeholder="https://vinaforest.vn" />
+            </div>
+          </div>
           <div class="col-md-4">
             <div class="form-group">
               <label class="col-form-label" for="sortOrder"><?php echo $lang['sortForm'] ?></label>
               <input type="number" class="form-control" min="1" name="data[sortOrder]" id="sortOrder" value="<?php echo $sortOrder ?>" />
             </div>
           </div>
-          <div class="col-md-4">
+          <div class="col-md-2">
             <div class="form-group">
               <label class="col-form-label" for="active"><?php echo $lang['activeForm'] ?></label><br />
               <input type="checkbox" name="active" id="active" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
