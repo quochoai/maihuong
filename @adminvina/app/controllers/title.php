@@ -37,6 +37,9 @@
       case $def['actionContact']:
         $title = $lang['manageContact'];
         break;
+      case $def['actionPartner']:
+        $title = $lang['managePartner'];
+        break;
       default:
         $title = $lang['admin_title'];
         break;

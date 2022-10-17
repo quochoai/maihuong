@@ -28,15 +28,13 @@
 		$imgUpload = '';
 		if (in_array($ext, $array_ext_image)) {
 			$path = $def['imgUploadNewsRealPath'];
-			//if (!file_exists($path.stringImage($image))) {
-			$width = 500;
-			$height = 333;
-			if ($ext == 'jpeg' || $ext == 'JPEG' || $ext == 'webp')
-				$extGet = '.'.$ext;
-			else
+			if ($ext == 'jpeg' || $ext == 'JPEG' || $ext == 'webp') {
+				$extGet = substr($image, -5);
+				$filename = substr($image, 0, -5);
+			} else
 				$extGet = $ext;
-			$imgUpload = resizeImage2($width, $height, stringImage($image), $path, $_FILES['imageNews']['tmp_name'], stringImage($filename).'-'.'news'.time().$extGet);
-			//}
+			move_uploaded_file($_FILES['imageNews']['tmp_name'], $path.stringImage($filename).'-'.'news'.time().$extGet);
+			$imgUpload = stringImage($filename).'-'.'news'.time().$extGet;
 		}
 		$data['imageNews'] = $imgUpload;
 
@@ -46,15 +44,13 @@
 		$imgUploadShareFb = '';
 		if (in_array($extShareFb, $array_ext_image)) {
 			$path = $def['imgUploadNewsRealPath'];
-			//if (!file_exists($path.stringImage($image))) {
-			$widthFb = 450;
-			$heightFb = 235;
-			if ($extShareFb == 'jpeg' || $extShareFb == 'JPEG' || $extShareFb == 'webp')
-				$extGetFb = '.'.$extShareFb;
-			else
+			if ($extShareFb == 'jpeg' || $extShareFb == 'JPEG' || $extShareFb == 'webp') {
+				$extGetFb = substr($imageShareFb, -5);
+				$filenameShareFb = substr($imageShareFb, 0, -5);
+			} else
 				$extGetFb = $extShareFb;
-			$imgUploadShareFb = resizeImage2($widthFb, $heightFb, stringImage($imageShareFb), $path, $_FILES['imageShareFb']['tmp_name'], stringImage($filenameShareFb).'-'.'newsShareFB'.time().$extGetFb);
-			//}
+			move_uploaded_file($_FILES['imageShareFb']['tmp_name'], $path.stringImage($filenameShareFb).'-'.'newsShareFB'.time().$extGetFb);
+			$imgUploadShareFb = stringImage($filenameShareFb).'-'.'newsShareFB'.time().$extGetFb;
 		}
 		$data['imageShareFb'] = $imgUploadShareFb;
 		$tags = $_POST['tags'];
@@ -64,21 +60,9 @@
 		
 		$table = $prefixTable.$def['tableNews'];
 		$result = $h->insertDataBy($data, $table, $user_id);
-		if ($result) {
-			/*$last = $h->getLast($table);
-			$idLast = $last['id'];
-			if (count($tags) > 0) {
-				$tableNewsTags = $prefixTable.$def['tableNewsTags'];
-				foreach ($tags as $k => $tag) {
-					$dataTag['newsID'] = $idLast;
-					$dataTag['tagID'] = $tag;
-					$dataTag['sortOrder'] = $k + 1;
-					$dataTag['active'] = 1;
-					$insertTag = $h->insertDataBy($dataTag, $tableNewsTags, $user_id);
-				}
-			}*/			
+		if ($result)
 			echo '1;success';
-		} else
+		else
 			echo '2;error';
 	} else
 		echo '5;error';

@@ -44,6 +44,16 @@ $lang = [
   'addNewsText' => 'Thêm tin tức mới',
   'updateNewsText' => 'Cập nhật tin tức',
   'postDate' => 'Ngày đăng',
+
+  // partner
+  'managePartner' => 'Quản lý Logo đối tác',
+  'partnerText' => 'đối tác',
+  'addPartnerText' => 'Thêm logo đối tác mới',
+  'updatePartnerText' => 'Cập nhật logo đối tác',
+  'partnerName' => 'Tên đối tác',
+  'partnerLogo' => 'Logo đối tác',
+  
+
   // tags
   'manageTags' => 'Quản lý Tags',
   'tagText' => 'tag',

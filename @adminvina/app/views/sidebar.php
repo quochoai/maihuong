@@ -93,6 +93,12 @@
               <p><?php echo $lang['manageContact'] ?></p>
             </a>
           </li>
+          <li class="nav-item<?php if ($pqh[0] == $def['actionPartner']) echo ' menu-open'; ?>">
+            <a href="?action=<?php echo $def['actionPartner'] ?>" class="nav-link<?php if ($pqh[0] == $def['actionPartner']) echo ' active' ?>">
+              <i class="fas fa-address-book nav-icon"></i>
+              <p><?php echo $lang['managePartner'] ?></p>
+            </a>
+          </li>
           <li class="nav-item has-treeview">
             <a href="<?php echo $def['link_logout'] ?>" class="nav-link">
               <i class="nav-icon fas fa-sign-out-alt"></i>
@@ -109,7 +115,7 @@
       <?php } 
         if ($pli['image'] != '') {
       ?>
-        <div class="col-md-11 bg-white color-black mr-2 ml-2"><img src="upload/admin/<?php echo $pli['image'] ?>" style="max-width: 100%;" /></div>
+        <div class="col-md-11 bg-white color-black mr-2 ml-2"><img src="<?php echo $def['imgUploadAdmin'].$pli['image'] ?>" style="max-width: 100%;" /></div>
       <?php } ?>
       </div>
       <!-- /.sidebar-menu -->

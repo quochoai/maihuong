@@ -16,6 +16,7 @@
   define("_processAdmin", _process.'admins/');
   define("_processRole", _process.'role/');
   define("_processFunctionRole", _process.'frole/');
+  define("_processPartner", _process.'partner/');
   define("_processHtml", _process.'htmls/');
   define("_processConfig", _process.'configuration/');
   define("_views", _app."views/");
@@ -43,6 +44,8 @@
   define("_viewFunctionRole", _views.'frole/');
   define("_viewRequireContact", _viewsRequire.'contact/');
   define("_viewContact", _views.'contact/');
+  define("_viewRequirePartner", _viewsRequire.'partner/');
+  define("_viewPartner", _views.'partner/');
   define("_viewController", 'app/controllers/');
   define('_imgUpload', _url.'imgUpload/');
   define('_ImgUploadRealPath', substr(_dir_root_, 0, -10)."imgUpload/");
@@ -67,6 +70,7 @@
     'actionRole' => 'role',
     'actionRoleFunction' => 'function-role',
     'actionContact' => 'contact',
+    'actionPartner' => 'partner',
     // product category
     'listCateProduct' => _viewRequireCateProduct.'list.php',
     "listDataCateProduct" => _viewRequireCateProduct.'data/',
@@ -258,6 +262,26 @@
     'listDataContact' => _viewContact.'data/',
     'listDataContactJs' => _viewContact.'data/data.js',
 
+    // partner list
+    "listPartner" => _viewRequirePartner.'list.php',
+    "listDataPartner" => _viewPartner.'data/',
+    "listDataPartnerJs" => _viewPartner.'data/data.js',
+    "listPartnerDeleted" => _viewRequirePartner.'listDeleted.php',
+    "listDataPartnerDeleted" => _viewPartner.'dataDeleted.php',
+    "listDataPartnerDeletedJs" => _viewPartner.'dataDeleted.js',
+    'imgUploadPartner' => _imgUpload.'partner/',
+    'imgUploadPartnerRealPath' => _ImgUploadRealPath.'partner/',
+    // partner add
+    "partnerAdd" => _viewPartner.'add/',
+    "partnerAddProcess" => _processPartner.'add/',
+    // partner update
+    "partnerUpdate" => _viewPartner.'update/',
+    'partnerUpdateProcess' => _processPartner.'update/',
+    // partner delete
+    "partnerDeleteProcess" => _processPartner.'delete/',
+    // partner active
+    "partnerActiveProcess" => _processPartner.'active/',
+
     // theme
     "themeDist" => _theme.'dist/',
     "themeJs" => _theme.'js/',
@@ -280,6 +304,7 @@
     'tableNewsTags' => 'news_tags',
     'tableTags' => 'tags',
     'tableContact' => 'contacts',
+    'tablePartner' => 'partners',
 
     // logout
     "logout" => "logout",

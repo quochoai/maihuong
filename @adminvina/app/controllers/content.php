@@ -37,6 +37,9 @@
       case $def['actionContact']:
         require_once $def['listContact'];
         break;
+      case $def['actionPartner']:
+        require_once $def['listPartner'];
+        break;
       default:
         require_once $def['dashboard'];
         break;
