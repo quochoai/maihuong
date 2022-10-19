@@ -53,11 +53,12 @@
 			$imgUploadShareFb = stringImage($filenameShareFb).'-'.'newsShareFB'.time().$extGetFb;
 		}
 		$data['imageShareFb'] = $imgUploadShareFb;
+		/*
 		$tags = $_POST['tags'];
 		if (count($tags) > 0) {
 			$data['tags'] = implode(",", $tags);
 		}
-		
+		*/
 		$table = $prefixTable.$def['tableNews'];
 		$result = $h->insertDataBy($data, $table, $user_id);
 		if ($result)

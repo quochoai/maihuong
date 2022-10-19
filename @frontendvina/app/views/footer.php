@@ -117,7 +117,7 @@
     </a>
     <script src="assets/js/common.js" type="text/javascript"></script>
     <script src="assets/plugins/flexslider/jquery.flexslider.js" type="text/javascript"></script>
-    <script src="assets/plugins/zoom/jquery.elevatezoom308.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/zoom/jquery.elevatezoom.min.js" type="text/javascript"></script>
     <script src="assets/plugins/owlCarousel/owl.carousel.min.js" type="text/javascript"></script>
     <script src="assets/plugins/parallax/parallax.js" type="text/javascript"></script>
     <script src="assets/js/api.jquery.js" type="text/javascript"></script>

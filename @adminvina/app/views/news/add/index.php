@@ -89,6 +89,7 @@
               <input type="checkbox" name="active" id="active" checked data-bootstrap-switch data-off-color="danger" data-on-color="success">
             </div>
           </div>
+          <!--
           <div class="col-md-12">
             <div class="form-group">
               <label class="col-form-label" for="name"><?php echo $lang['tags'] ?></label>
@@ -105,6 +106,7 @@
               </div>
             </div>
           </div>
+                -->
           <div class="col-md-12 card card-success">
             <div class="card-header">
               <div class="card-title"><?php echo $lang['infoForSeo'] ?></div>

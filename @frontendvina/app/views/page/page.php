@@ -3,7 +3,6 @@
     <div class="row">
     <?php
       require_once "contentPage.php";
-      require_once "@frontendtaxi/app/views/news/right.php";
     ?>
     </div>
   </div>

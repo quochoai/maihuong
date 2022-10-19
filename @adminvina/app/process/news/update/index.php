@@ -59,13 +59,14 @@ if (isset($_SESSION['is_logined']) || isset($_COOKIE['islogined'])) {
 			}
 			$data['imageShareFb'] = $imgUploadShareFb;
 		}
+		/*
 		$tags = $_POST['tags'];
 		if (count($tags) > 0) {
 			$data['tags'] = implode(",", $tags);
 		} else {
 			$data['tags'] = NULL;
 		}
-
+		*/
 		$table = $prefixTable.$def['tableNews'];
 		$result = $h->updateDataBy($data, $table, "where id = $id", $user_id);
 		if ($result)

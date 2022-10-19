@@ -3,24 +3,35 @@
     require_once $def['requireHome'];
   else {
     switch ($mod[0]) {
-      case $def['actionOrder']:
-        if (!isset($mod[2]) && $mod[2] == '')
-          require_once $def['requireOrder'];
-        else
-          require_once $def['requireOrderDetail'];
+      case $def['actionContact']:
+        require_once $def['requireContact'];
+        break;
+      case $def['actionSearch']:
+        require_once $def['requireSearch'];
         break;
       case $def['actionNews']:
-        if (!isset($mod[2]) && $mod[2] == '')
+        $nco = count($mod);
+        $ncoo = $nco - 1;
+        $htm = substr($mod[$ncoo],-5);
+        if($htm != '.html')
           require_once $def['requireNews'];
         else
           require_once $def['requireNewsDetail'];
         break;
+      case $def['actionProduct']:
+        $nco = count($mod);
+        $ncoo = $nco - 1;
+        $htm = substr($mod[$ncoo],-5);
+        if($htm != '.html')
+          require_once $def['requireProduct'];
+        else
+          require_once $def['requireProductDetail'];
+        break;
       case $def['actionAbout']:
-      case $def['actionPolicy']:
-      case $def['actionResolveComplain']:
-      case $def['actionSecure']:
         require_once $def['requirePage'];
         break;
-      
+      case $def['actionTag']:
+        require_once $def['requireTag'];
+        break;      
     }
   }

@@ -1,0 +1,1 @@
+jQuery(document).ready(function($){function loadData(page){$.post(linkData,{page:page,whereProduct:whereProduct},function(dataResponse){$('#contentProduct').html(dataResponse);});}loadData(1);$('body').on('click','a.linkRef',function(){var page=$(this).attr('rel');loadData(page);$('html, body').animate({scrollTop: $("#titleCategory").offset().top}, 2000);});});

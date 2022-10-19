@@ -3,122 +3,100 @@
     $desc = $conf['descriptionSeo'];
   else {
     switch ($mod[0]) {
-      case $def['actionOrder']:
-        $descOrder = $h->getById($tableConfig, 2);
-        if (!isset($mod[1]) && $mod[1] == '')
-          $desc = $descOrder['descriptionSeo'];
-        elseif ($mod[1] != '' && !isset($mod[2]) && $mod[2] == '') {
-          $tableCateOrder = $prefixTable.$def['tableCategoriesOrders'];
-          $has = 0;
-          $checkCateOrder = $h->checkExist($tableCateOrder, "deleted_at is null and active = 1");
-          if ($checkCateOrder) {
-            $cateOrders = $h->getAllSelect("id, titleCate, descriptionSeo", $tableCateOrder, "deleted_at is null and active = 1");
-            foreach ($cateOrders as $cate) {
-              $linkCate = chuoilink($cate['titleCate']);
-              if ($linkCate == $mod[1]) {
-                $has = 1;
-                $descSeo = $cate['descriptionSeo'];
+      case $def['actionProduct']:
+        $nco = count($mod);
+        $ncoo = $nco - 1;
+        $htm = substr($mod[$ncoo],-5);
+        $tableCate = $prefixTable.$def['tableCategories'];
+        $descProduct = $h->getById($tableConfig, 2);
+        if ($htm != '.html') {
+          if ($mod[1] == '')
+            $desc = $descProduct['descriptionSeo'];
+          elseif ($mod[1] != '' && $mod[2] == '') {
+            $has = 0;
+            $checkCateProduct = $h->checkExist($tableCate, "deleted_at is null and active = 1");
+            if ($checkCateProduct) {
+              $cateProduct = $h->getAllSelect("id, titleCate, descriptionSeo", $tableCate, "deleted_at is null and active = 1");
+              foreach ($cateProduct as $cate) {
+                $linkCate = chuoilink($cate['titleCate']);
+                if ($linkCate == $mod[1]) {
+                  $has = 1;
+                  $descSeo = $cate['descriptionSeo'];
+                  if ($descSeo != '' && !is_null($descSeo))
+                    $desc = $descSeo;
+                  else
+                    $desc = $descProduct['descriptionSeo'];
+                  break;
+                }
+              }
+            }
+            if ($has == 1)
+              $desc = $desc;
+            else
+              $desc = $lang['pageNotFound'];
+          } elseif ($mod[2] != '') {
+            $checkCateProduct = $h->checkExist($tableCate, "deleted_at is null and active = 1");
+            $has2 = 0;
+            if ($checkCateProduct) {
+              $cateProduct = $h->getAllSelect("id, titleCate, descriptionSeo", $tableCate, "deleted_at is null and active = 1");
+              foreach ($cateProduct as $cate) {
+                $linkCate = chuoilink($cate['titleCate']);
+                if ($linkCate == $mod[2]) {
+                  $has2 = 1;
+                  $descSeo = $cate['descriptionSeo'];
+                  if ($descSeo != '' && !is_null($descSeo))
+                    $desc = $descSeo;
+                  else
+                  $desc = $descProduct['descriptionSeo'];
+                  break;
+                }
+              }
+            }
+            if ($has2 == 1)
+              $desc = $desc;
+            else
+              $desc = $lang['pageNotFound'];
+          }
+        } else {
+          $tableProduct = $prefixTable.$def['tableProduct'];
+          $has3 = 0;
+          $checkProduct = $h->checkExist($tableProduct, "deleted_at is null and active = 1");
+          if ($checkProduct) {
+            $products = $h->getAllSelect("id, titleProduct, descriptionSeo", $tableProduct, "deleted_at is null and active = 1", "sortOrder desc, created_at desc, id desc");
+            foreach ($products as $product) {
+              $titleProduct = $product['titleProduct'];
+              $linkCompare = chuoilink($titleProduct).'.html';
+              if ($linkCompare == $mod[$ncoo]) {
+                $has3 = 1;
+                $descSeo = $product['descriptionSeo'];
                 if ($descSeo != '' && !is_null($descSeo))
                   $desc = $descSeo;
                 else
-                  $desc = $descOrder['descriptionSeo'];
+                  $desc = $descProduct['descriptionSeo'];
                 break;
               }
             }
           }
-          if ($has == 1)
+          if ($has3 == 1)
             $desc = $desc;
           else
-            $desc = $descOrder['descriptionSeo'];
-        }
-        elseif (isset($mod[2]) && $mod[2] != '') {
-          $tableCateOrder = $prefixTable.$def['tableCategoriesOrders'];
-          $tableOrder = $prefixTable.$def['tableOrders'];
-          $checkCateOrder = $h->checkExist($tableCateOrder, "deleted_at is null and active = 1");
-          if ($checkCateOrder) {
-            $cateOrders = $h->getAllSelect("id, titleCate", $tableCateOrder, "deleted_at is null and active = 1");
-            foreach ($cateOrders as $cate) {
-              $linkCate = chuoilink($cate['titleCate']);
-              if ($linkCate == $mod[1]) {
-                $cateID = $cate['id'];
-                break;
-              }
-            }
-          }
-          $has = 0;
-          $checkOrder = $h->checkExist($tableOrder, "deleted_at is null and active = 1 and cateID = $cateID");
-          if ($checkOrder) {
-            $orders = $h->getAllSelect("id, titleOrder, descriptionSeo", "$tableOrder as o", "deleted_at is null and active = 1 and cateID = $cateID", "created_at desc, sortOrder desc, id desc");
-            foreach ($orders as $order) {
-              $descOrder = $order['titleOrder'];
-              $linkCompare = chuoilink($descOrder).'.html';
-              if ($linkCompare == $mod[2]) {
-                $has = 1;
-                $descSeo = $order['descriptionSeo'];
-                if ($descSeo != '' && !is_null($descSeo))
-                  $desc = $descSeo;
-                else
-                  $desc = $descOrder['descriptionSeo'];
-                break;
-              }
-            }
-          }
-          if ($has == 1)
-            $desc = $desc;
-          else
-            $desc = $descOrder['descriptionSeo'];
-        }
+            $desc = $lang['pageNotFound'];
+        }       
         break;
       case $def['actionNews']:
         $descNews = $h->getById($tableConfig, 3);
         if (!isset($mod[1]) && $mod[1] == '')
           $desc = $descNews['descriptionSeo'];
-        elseif ($mod[1] != '' && !isset($mod[2]) && $mod[2] == '') {
-          $tableCateNews = $prefixTable.$def['tableCategoriesNews'];
-          $has = 0;
-          $checkCateNews = $h->checkExist($tableCateNews, "deleted_at is null and active = 1");
-          if ($checkCateNews) {
-            $cateNews = $h->getAllSelect("id, titleCate, descriptionSeo", $tableCateNews, "deleted_at is null and active = 1");
-            foreach ($cateNews as $cate) {
-              $linkCate = chuoilink($cate['titleCate']);
-              if ($linkCate == $mod[1]) {
-                $has = 1;
-                $descSeo = $cate['descriptionSeo'];
-                if ($descSeo != '' && !is_null($descSeo))
-                  $desc = $descSeo;
-                else
-                  $desc = $descNews['descriptionSeo'];
-                break;
-              }
-            }
-          }
-          if ($has == 1)
-            $desc = $desc;
-          else
-            $desc = $descNews['descriptionSeo'];
-        }
-        elseif (isset($mod[2]) && $mod[2] != '') {
-          $tableCateNews = $prefixTable.$def['tableCategoriesNews'];
+        else {
           $tableNews = $prefixTable.$def['tableNews'];
-          $checkCateNews = $h->checkExist($tableCateNews, "deleted_at is null and active = 1");
-          if ($checkCateNews) {
-            $cateNews = $h->getAllSelect("id, titleCate", $tableCateNews, "deleted_at is null and active = 1");
-            foreach ($cateNews as $cate) {
-              $linkCate = chuoilink($cate['titleCate']);
-              if ($linkCate == $mod[1]) {
-                $cateID = $cate['id'];
-                break;
-              }
-            }
-          }
           $has = 0;
-          $checkNews = $h->checkExist($tableNews, "deleted_at is null and active = 1 and cateID = $cateID");
+          $checkNews = $h->checkExist($tableNews, "deleted_at is null and active = 1");
           if ($checkNews) {
-            $newss = $h->getAllSelect("id, titleNews, descriptionSeo", "$tableNews as n", "deleted_at is null and active = 1 and cateID = $cateID", "created_at desc, sortOrder desc, id desc");
+            $newss = $h->getAllSelect("id, titleNews, descriptionSeo", $tableNews, "deleted_at is null and active = 1", "sortOrder desc, created_at desc, id desc");
             foreach ($newss as $news) {
               $titleNews = $news['titleNews'];
               $linkCompare = chuoilink($titleNews).'.html';
-              if ($linkCompare == $mod[2]) {
+              if ($linkCompare == $mod[1]) {
                 $has = 1;
                 $descSeo = $news['descriptionSeo'];
                 if ($descSeo != '' && !is_null($descSeo))
@@ -132,7 +110,7 @@
           if ($has == 1)
             $desc = $desc;
           else
-            $desc = $descNews['descriptionSeo'];
+            $desc = $lang['pageNotFound'];
         }
         break;
       case $def['actionAbout']:
@@ -142,27 +120,27 @@
         else
           $desc = $conf['descriptionSeo'];
         break;
-      case $def['actionPolicy']:
-        $info = $h->getById($tableInfo, 2);
-        if ($info['descriptionSeo'] != '' && !is_null($info['descriptionSeo']))
-          $desc = $info['descriptionSeo'];
+      case $def['actionContact']:
+        $contact = $h->getById($tableConfig, 7);
+        if ($contact['descriptionSeo'] != '' && !is_null($contact['descriptionSeo']))
+          $desc = $contact['descriptionSeo'];
         else
           $desc = $conf['descriptionSeo'];
         break;
-      case $def['actionResolveComplain']:
-        $info = $h->getById($tableInfo, 3);
-        if ($info['descriptionSeo'] != '' && !is_null($info['descriptionSeo']))
-          $desc = $info['descriptionSeo'];
+      case $def['actionSearch']:
+        $descSearch = $h->getById($tableConfig, 8);
+        if ($descSearch['descriptionSeo'] != '' && !is_null($descSearch['descriptionSeo']))
+          $desc = $descSearch['descriptionSeo'];
         else
           $desc = $conf['descriptionSeo'];
-        break;
-      case $def['actionSecure']:
-        $info = $h->getById($tableInfo, 4);
-        if ($info['descriptionSeo'] != '' && !is_null($info['descriptionSeo']))
-          $desc = $info['descriptionSeo'];
+        break; 
+      case $def['actionTag']:
+        $tag = $h->getById($tableConfig, 9);
+        if ($tag['descriptionSeo'] != '' && !is_null($tag['descriptionSeo']))
+          $desc = $tag['descriptionSeo'];
         else
           $desc = $conf['descriptionSeo'];
-        break;
+        break;                         
     }
   }
   _e($desc);

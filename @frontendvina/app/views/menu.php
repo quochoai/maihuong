@@ -68,7 +68,7 @@
                     $cateSub = $h->getAllSelect("id, titleCate", $tableCate, "deleted_at is null and active = 1 and cateID = $cateID", "sortOrder asc, id asc");
                     foreach ($cateSub as $scate) {
                       $titleSubCate = $scate['titleCate'];
-                      $linkSubCate = $linkCate.'/'.chuoilink($titleSubCate).'/';
+                      $linkSubCate = $linkCate.chuoilink($titleSubCate).'/';
                       $menuProduct .= '<li class="menu_item2"><a class="menu_sub2_link" href="'.$linkSubCate.'"><span>'.$titleSubCate.'</span></a></li>';
                     }
 
@@ -87,13 +87,12 @@
       </div>
       <div class="col-lg-3 col-md-3 col-sm-2">
         <div class="search pull-right">
-          <span class="icon-search">
+          <span class="icon-search cursorPointer">
             <i class="fa fa-search" aria-hidden="true"></i>
           </span>
           <form style="display:none" action="" method="post" id="search_mini_form" class="search_mini_form">
-            <input type="text" placeholder="<?php _e($lang['keywordEnter']) ?>" value="" maxlength="70" class="" name="query" id="search">
+            <input type="text" placeholder="<?php _e($lang['keywordEnter']) ?>" value="" maxlength="70" class="" name="txtSearch" id="txtSearch">
           </form>
-          <div class="cate-overlay2"></div>
         </div>
       </div>
     </div>
@@ -102,11 +101,11 @@
 <nav class="menu-mobile hidden-lg">
   <div class="container">
     <div class="search2 pull-right">
-      <span class="icon-search2">
+      <span class="icon-search2 cursorPointer">
         <i class="fa fa-search" aria-hidden="true"></i>
       </span>
       <form style="display:none" action="" method="post" id="search_mini_form2">
-        <input type="text" placeholder="<?php _e($lang['keywordEnter']) ?>" value="" maxlength="70" class="" name="query" id="search1">
+        <input type="text" placeholder="<?php _e($lang['keywordEnter']) ?>" value="" maxlength="70" class="" name="txtSearch" id="txtSearch">
       </form>
     </div>
     <span class="bars">
@@ -134,7 +133,7 @@
                 $cateSub = $h->getAllSelect("id, titleCate", $tableCate, "deleted_at is null and active = 1 and cateID = $cateID", "sortOrder asc, id asc");
                 foreach ($cateSub as $scate) {
                   $titleSubCate = $scate['titleCate'];
-                  $linkSubCate = $linkCate.'/'.chuoilink($titleSubCate).'/';
+                  $linkSubCate = $linkCate.chuoilink($titleSubCate).'/';
                   $menuProduct2 .= '<li class="menu-item-sub-mb-2"><a class="menu-link-sub-mb-2" href="'.$linkSubCate.'"><span>'.$titleSubCate.'</span></a></li>';
                 }
 

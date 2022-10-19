@@ -10,14 +10,12 @@
   $last_btn = true;
   $per_page = $def['perPageNews'];
   $start = $page * $per_page;
-  $tableCateNews = $prefixTable.$def['tableCategoriesNews'];
   $tableNews = $prefixTable.$def['tableNews'];
-  $newss = $h->getAllSelect("n.id, titleNews, titleCate, postDate, n.created_at as createdAt", "$tableNews as n, $tableCateNews as c", $where." and n.cateID = c.id", "n.created_at desc, n.sortOrder desc, n.id desc", "limit $start,$per_page");
-  $msg = '<div class="itemHeader"><h2 class="itemTitle text-uppercase">'.$lang['relatedNews'].'</h2></div>';
-  $msg .= '<div class="bai-lien-quan"><ul>';
+  $newss = $h->getAllSelect("id, titleNews, postDate, created_at as createdAt", $tableNews, $where, "sortOrder desc, created_at desc, id desc", "limit $start,$per_page");
+  $msg = '<ul>';
   foreach ($newss as $news) {
     $titleNews = $news['titleNews'];
-    $linkNews = $def['actionNews'].'/'.chuoilink($news['titleCate']).'/'.chuoilink($titleNews).'.html';
+    $linkNews = $def['actionNews'].'/'.chuoilink($titleNews).'.html';
     $pd = $news['postDate'];
     if (!is_null($pd) && $pd != '')
       $postDate = date("d/m/Y", strtotime($pd));
@@ -26,12 +24,11 @@
       $postDate = date("d/m/Y", strtotime($createdAt));
     }
       
-    $msg .= '<li><a href="'.$linkNews.'"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> '.$titleNews.' <i>('.$postDate.')</i></a></li>';
+    $msg .= '<li style="margin-bottom: 7px"><a href="'.$linkNews.'"><i class="fa fa-long-arrow-right" aria-hidden="true"></i> '.$titleNews.' <i>('.$postDate.')</i></a></li>';
   }
-  $msg .= '</ul></div>';
-  
+  $msg .= '</ul>';
   /* --------------------------------------------- */
-  $count = $h->checkExist("$tableNews as n, $tableCateNews as c", $where." and n.cateID = c.id", "n.id");
+  $count = $h->checkExist($tableNews, $where);
   $no_of_paginations = ceil($count / $per_page);
 
   if($count >= ($per_page+1)) {
@@ -54,29 +51,28 @@
   }
 
   /* ----------------------------------------------------------------------------------------------------------- */
-
-  $msg .= '<div class="k2_Pagination global_pagination"><ul class="pagination">';
+  $msg .= '<div class="pager clearfix"><div class="pages clearfix"><ul class="pagination">';
   if($cur_page == 1) {
-    $msg .= '<li class="active"><span><i class="fa fa-long-arrow-left"></i></span></li>';
+    $msg .= '<li class="active"><a style="pointer-events:none"><i class="fa fa-long-arrow-left"></i></a></li>';
   }
   // FOR ENABLING THE PREVIOUS BUTTON
   if ($previous_btn && $cur_page > 1) {
     $pre = $cur_page - 1;
-    $msg .= '<li><a class="pagenav linkRef" rel="'.$pre.'"><i class="fa fa-long-arrow-left"></i></a></li>';
+    $msg .= '<li><a class="pagenav linkRef cursorPointer" rel="'.$pre.'"><i class="fa fa-long-arrow-left"></i></a></li>';
   }
   for ($i = $start_loop; $i <= $end_loop; $i++) {
     if ($cur_page == $i)
-      $msg .= '<li class="active"><span>'.$i.'<span></li>';
+      $msg .= '<li class="active"><a style="pointer-events:none">'.$i.'</a></li>';
     else
-      $msg .= '<li><a class="pagenav linkRef" rel="'.$i.'">'.$i.'</a></li>';
+      $msg .= '<li><a class="pagenav linkRef cursorPointer" rel="'.$i.'">'.$i.'</a></li>';
   }
   // TO ENABLE THE NEXT BUTTON
   if ($next_btn && $cur_page < $no_of_paginations) {
     $nex = $cur_page + 1;
-    $msg .= '<li><a class="pagenav linkRef" rel="'.$nex.'"><i class="fa fa-long-arrow-right"></i></a></li>';
+    $msg .= '<li><a class="pagenav linkRef cursorPointer" rel="'.$nex.'"><i class="fa fa-long-arrow-right"></i></a></li>';
   } else if ($next_btn)
     $msg .= '<li><a class="pagenav"><i class="fa fa-chevron-right"></i></a></li>';
 
-  $msg .= "</ul></div>";  // Content for pagination
+  $msg .= "</ul></div></div>";  // Content for pagination
   }
   _e($msg);

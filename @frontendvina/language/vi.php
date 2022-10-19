@@ -12,13 +12,15 @@
     'securePrivacy' => 'Chính sách bảo mật',
     'address' => 'Địa chỉ',
     'phone' => 'Điện thoại',
+    'allProduct' => 'Tất cả sản phẩm',
 
     // home
     'cerificate' => 'Chứng nhận',
     'provideProduct' => 'Sản phẩm cung cấp',
     'newnews' => 'Tin mới',
     'partnerText' => 'Đối tác',
-
+    'infoProduct' => 'Thông tin sản phẩm',
+    'tag' => 'Tag',
     // order
     'category' => 'Danh mục',
     'viewDetail' => 'Xem chi tiết',
@@ -27,6 +29,22 @@
     'views' => 'Lượt xem', 
     'viewMore' => 'Xem thêm',
     'achievement' => 'Những thành tựu chúng tôi đã đạt được',
+
+    // contact
+    'contactName' => 'Họ tên',
+    'contactContent' => 'Nội dung',
+    'contactRequire' => 'Thông tin bắt buộc',
+    'contactSend' => 'Gửi',
+    'contactInfo' => 'Thông tin liên hệ',
+    'notInputContactName' => 'Bạn chưa điền họ tên. Vui lòng điền vào.',
+    'notInputContactEmail' => 'Bạn chưa điền địa chỉ email. Vui lòng điền vào.',
+    'emailInvalid' => 'Địa chỉ email chưa hợp lệ. Vui lòng điền lại.',
+    'notInputContactContent' => 'Bạn chưa điền nội dung liên hệ. Vui lòng điền vào.',
+    'contactSuccess' => 'Phản hồi của bạn đã được chúng tôi ghi nhận. Chúng tôi sẽ trả lời bạn sớm nhất có thể. Cảm ơn bạn đã liên hệ với chúng tôi.',
+    'contactError' => 'Liên hệ xảy ra lỗi. Vui lòng thử lại sau',
+    'notInputKeyword' => 'Bạn chưa điền từ khóa để tìm kiếm',
+    'searchResultWithKeyword' => 'Kết quả tìm kiếm với từ khóa ',
+    'shareArticle' => 'Chia sẻ bài viết',
 
     'pageNotFound' => 'Trang không tồn tại',
     'temporaryNotData' => 'Tạm thời chưa có dữ liệu trên trang này',

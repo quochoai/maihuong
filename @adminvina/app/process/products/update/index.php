@@ -19,21 +19,24 @@ if (isset($_SESSION['is_logined']) || isset($_COOKIE['islogined'])) {
 
     $array_ext_image = array(".png", ".jpg", "jpeg", ".gif", ".bmp", ".PNG", ".JPG", "JPEG", ".GIF", ".BMP", "webp");
 		$image = $_FILES['imageProduct']['name'];
-		$ext = substr($image, -4);
-		$filename = substr($image, 0, -4);
-		$imgUpload = '';
-		if (in_array($ext, $array_ext_image)) {
-			$path = $def['imgUploadProductRealPath'];
-			if ($ext == 'jpeg' || $ext == 'JPEG' || $ext == 'webp') {
-				$extGet = substr($image, -5);
-				$filename = substr($image, 0, -5);
-			} else
-				$extGet = $ext;
-			move_uploaded_file($_FILES['imageProduct']['tmp_name'], $path.stringImage($filename).'-'.'product'.time().$extGet);
-			$imgUpload = stringImage($filename).'-'.'product'.time().$extGet;
+		if ($image != '') {
+			$ext = substr($image, -4);
+			$filename = substr($image, 0, -4);
+			$imgUpload = '';
+			if (in_array($ext, $array_ext_image)) {
+				$path = $def['imgUploadProductRealPath'];
+				if ($ext == 'jpeg' || $ext == 'JPEG' || $ext == 'webp') {
+					$extGet = substr($image, -5);
+					$filename = substr($image, 0, -5);
+				} else
+					$extGet = $ext;
+				
+				move_uploaded_file($_FILES['imageProduct']['tmp_name'], $path.stringImage($filename).'-'.'product'.time().$extGet);
+				$imgUpload = stringImage($filename).'-'.'product'.time().$extGet;
+			}
+			if ($imgUpload != '')
+				$data['imageProduct'] = $imgUpload;
 		}
-		$data['imageProduct'] = $imgUpload;
-
 		$imageShareFb = $_FILES['imageShareFb']['name'];
 		$extShareFb = substr($imageShareFb, -4);
 		$filenameShareFb = substr($imageShareFb, 0, -4);
@@ -48,7 +51,8 @@ if (isset($_SESSION['is_logined']) || isset($_COOKIE['islogined'])) {
 			move_uploaded_file($_FILES['imageShareFb']['tmp_name'], $path.stringImage($filenameShareFb).'-'.'productShareFB'.time().$extGetFb);
 			$imgUploadShareFb = stringImage($filenameShareFb).'-'.'productShareFB'.time().$extGetFb;
 		}
-		$data['imageShareFb'] = $imgUploadShareFb;
+		if ($imgUploadShareFb != '')
+			$data['imageShareFb'] = $imgUploadShareFb;
 
 		$olds = $_POST['old'];
 		$array_old = array();

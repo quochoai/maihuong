@@ -1,10 +1,12 @@
 <?php
   define("_url", "http://maihuong.com/");
+  define("_url2", "http://maihuong.com");
   define("_assets", _url.'assets/');
   define("_theme", _assets."themes/");
   define("_app", _url.'@frontendvina/app/');
   define("_process", _app."process/");
   define("_processNews", _process.'news/');
+  define("_processContact", _process.'contact/');
   define("_processTag", _process.'tags/');
   define("_processInfo", _process.'information/');
   define("_views", _app."views/");
@@ -31,7 +33,6 @@
     // action
     'actionNews' => 'tin-tuc',
     'actionProduct' => 'san-pham',
-    'actionTags' => 'tag',
     'actionAbout' => 've-chung-toi.html',
     'actionContact' => 'lien-he.html',
     'actionPolicy' => 'dieu-khoan-su-dung.html',
@@ -39,14 +40,18 @@
     'actionSecure' => 'chinh-sach-bao-mat.html',
     'actionChangePassword' => 'change-password',
     'actionTag' => 'tag',
+    'actionSearch' => 'tim-kiem',
     
     // require_once
     'requireHome' => _viewsRequire.'home/home.php',
     'requireProduct' => _viewsRequire.'product/product.php',
-    'requireProductDetail' => _viewsRequire.'product/product.php',
+    'requireProductDetail' => _viewsRequire.'product/productDetail.php',
     'requireNews' => _viewsRequire.'news/news.php',
     'requireNewsDetail' => _viewsRequire.'news/newsDetail.php',
-    'requirePage' => _viewsRequire.'page/page.php',
+    'requireContact' => _viewsRequire.'contact/contact.php',
+    'requirePage' => _viewsRequire.'page/contentPage.php',
+    'requireTag' => _viewsRequire.'tag/tag.php',
+    'requireSearch' => _viewsRequire.'search/search.php',
     
 
     // news
@@ -64,7 +69,7 @@
     'imgUploadCateProduct' => _imgUpload.'cateProducts/',
     
     'idConfig' => 1,
-    'perPageOrder' => 12,
+    'perPageProduct' => 12,
     'perPageNews' => 7,
     
     // theme

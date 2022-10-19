@@ -15,21 +15,23 @@
 		$array_ext_image = array(".png", ".jpg", "jpeg", ".gif", ".bmp", ".PNG", ".JPG", "JPEG", ".GIF", ".BMP", "webp");
 
 		$imageShareFb = $_FILES['imageShareFb']['name'];
-		$extShareFb = substr($imageShareFb, -4);
-		$filenameShareFb = substr($imageShareFb, 0, -4);
-		$imgUploadShareFb = '';
-		if (in_array($extShareFb, $array_ext_image)) {
-			$path = $def['imgUploadInfoRealPath'];
-			if ($extShareFb == 'jpeg' || $extShareFb == 'JPEG' || $extShareFb == 'webp') {
-				$extGetFb = substr($imageShareFb, -5);
-				$filenameShareFb = substr($imageShareFb, 0, -5);
-			} else
-				$extGetFb = $extShareFb;
-			move_uploaded_file($_FILES['imageShareFb']['tmp_name'], $path.stringImage($filenameShareFb).'-'.'infoShareFB'.time().$extGetFb);
-			$imgUploadShareFb = stringImage($filenameShareFb).'-'.'infoShareFB'.time().$extGetFb;
+		if ($imageShareFb != '') {
+			$extShareFb = substr($imageShareFb, -4);
+			$filenameShareFb = substr($imageShareFb, 0, -4);
+			$imgUploadShareFb = '';
+			if (in_array($extShareFb, $array_ext_image)) {
+				$path = $def['imgUploadInfoRealPath'];
+				if ($extShareFb == 'jpeg' || $extShareFb == 'JPEG' || $extShareFb == 'webp') {
+					$extGetFb = substr($imageShareFb, -5);
+					$filenameShareFb = substr($imageShareFb, 0, -5);
+				} else
+					$extGetFb = $extShareFb;
+				
+				move_uploaded_file($_FILES['imageShareFb']['tmp_name'], $path.stringImage($filenameShareFb).'-'.'infoShareFB'.time().$extGetFb);
+				$imgUploadShareFb = stringImage($filenameShareFb).'-'.'infoShareFB'.time().$extGetFb;
+			}
+			$data['imageShareFb'] = $imgUploadShareFb;
 		}
-		$data['imageShareFb'] = $imgUploadShareFb;    
-
 		$table = $prefixTable.$def['tableInformations'];
 		$result = $h->updateDataBy($data, $table, "where id = $id", $user_id);
 		if ($result)

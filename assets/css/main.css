@@ -268,7 +268,7 @@ span.icon-sub {
 	color: #fff;
 }
 a.menu_sub_link:last-child {
-	border-bottom: 4px solid #fbad1a !important;
+	border-bottom: 1px solid #fbad1a !important;
 }
 .menu_sub li .menu_sub_link:last-child {
 	/* border-bottom: 1px solid #fbad1a; */
@@ -1684,16 +1684,12 @@ p.text-success {
 }
 .tag-product{
 	position: relative;
-	padding-left: 35px;
-}
-.tag-product label{
-	position: absolute;
-	left: 0;
-	top: 1px;
+	padding-left: 0;
 }
 .tag-product li {
 	list-style: none;
 	display: inline-block;
+	margin-right: 5px;
 }
 .tag-product li a {
 	font-weight: 300;
@@ -1708,6 +1704,7 @@ p.text-success {
 .tag-product li a:hover {
 	color: #fbad1b;
 }
+.cursorPointer {cursor: pointer;}
 ul#product-detail-tab {
 	margin-top: 40px;
 }
